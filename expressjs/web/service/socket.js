@@ -3,13 +3,13 @@ const pathInfo = require("../pathInfo"),
 
 module.exports = function (server) {
   var io = require('socket.io')(server);
-  io.on('connection', function (socket) {
+  io.on('connection', (socket) => {
     console.log('connection');
 
-    socket.on('getDatas', function (data) {
-      sample.getData().then(function (res) {
+    socket.on('getDatas', (data) => {
+      sample.getData().then((res) => {
         socket.emit('fromServer', { type: 'chart', data: res });
-      }).catch(function (err) {
+      }).catch((err) => {
       });
     });
 

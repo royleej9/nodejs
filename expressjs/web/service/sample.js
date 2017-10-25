@@ -1,11 +1,11 @@
 var dateFormat = require('dateformat');
 var sqlite3 = require('sqlite3').verbose();
 var path = require('path');
-const dbPath = path.resolve(__dirname, 'todo.db')
+const dbPath = path.resolve(__dirname, 'data.db')
 
 
 function connectDb() {
-    let db = new sqlite3.Database('./data.db:', (err) => {
+    let db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
             return console.error(err.message);
         }
@@ -25,40 +25,31 @@ function closeDb(db) {
 
 function setupSampleDatas() {
     console.log('create data');
-    initTables().then(function (res) {
-        let db = connectDb();
-
-        setInterval(function indata() {
-            insertDatas(db);
-        }, 1000);
-
-    }).catch(function (err) {
-
+    const db = connectDb();
+    const repeatFn = () => { setInterval(() => { insertDatas(db) }, 1000); }
+    initTables().then((res) => {
+        repeatFn();
+    }).catch((err) => {
+        console.log(err);
     });
 }
 
 function getData() {
     let db = connectDb();
-    return new Promise(function (resolve, reject) {
-        db.all('SELECT * FROM chart_tb order by full_ms desc limit 20', function (err, rows) {
-            console.log(rows);
-
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM chart_tb order by full_ms desc limit 20', (err, rows) => {
             resolve(rows);
         });
-    });
-
-    // setInterval(function indata(){
-    //     selectDatas(db);
-    // }, 1500);    
+    })
 }
 
 
 ///////////////////////////////////////////////
 
 function initTables() {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         let db = connectDb();
-        db.all('select name from sqlite_master where type="table" and name="chart_tb"', function (err, rows) {
+        db.all('select name from sqlite_master where type="table" and name="chart_tb"', (err, rows) => {
             if (rows.length === 0) {
                 console.log('create table');
                 db.run('create table chart_tb (in_date TEXT, full_ms, val Integer)');
@@ -86,11 +77,7 @@ function insertDatas(db) {
     db.run('INSERT INTO chart_tb VALUES (?, ?, ?)', [date, fullMs, val]);
 }
 
-// function selectDatas(db) {
-//     db.all('SELECT * FROM chart_tb', function(err, row) {
-//         //  console.log(row);
-//     });
-// }
-
-module.exports.setupSampleDatas = setupSampleDatas;
-module.exports.getData = getData;
+module.exports = {
+    setupSampleDatas: setupSampleDatas,
+    getData: getData
+}
