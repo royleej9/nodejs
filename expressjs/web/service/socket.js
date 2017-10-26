@@ -1,5 +1,5 @@
 const pathInfo = require("../pathInfo"),
-  sample = require(pathInfo.service('sample'));
+  sample = require(pathInfo.getServicePath('sample'));
 
 module.exports = function (server) {
   var io = require('socket.io')(server);

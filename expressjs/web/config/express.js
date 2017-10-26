@@ -4,12 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var pathInfo = require("../pathInfo");
+var pathInfo = require(path.join(process.cwd(), 'pathInfo'));
 
 module.exports = function (app, config) {
 
     // view engine setup
-    app.set('views', pathInfo.views(''));
+    app.set('views', pathInfo.getViewsPath());
     app.set('view engine', 'ejs');
 
     // uncomment after placing your favicon in /public
@@ -19,10 +19,9 @@ module.exports = function (app, config) {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, '../public')));
-    console.log(path.join(__dirname, '../public'));
 
     // route
-    require('./route')(app);
+    require( pathInfo.getRoutesPath('route') )(app);
 
     // default handler    
     require('./defaultHandler')(app);
