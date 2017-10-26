@@ -1,7 +1,7 @@
 var dateFormat = require('dateformat');
 var sqlite3 = require('sqlite3').verbose();
 var path = require('path');
-const dbPath = path.resolve(__dirname, 'data.db')
+const dbPath = path.resolve(process.cwd(), 'data.db')
 
 
 function connectDb() {
