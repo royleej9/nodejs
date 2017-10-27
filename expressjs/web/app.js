@@ -18,7 +18,7 @@ sample.getData();
 //------------------------------------
 
 
-server.listen(process.env.PORT || 8080, process.env.IP || "0.0.0.0", function () {
+server.listen(process.env.PORT || 80, process.env.IP || "0.0.0.0", function () {
 var addr = server.address();
 });
 
