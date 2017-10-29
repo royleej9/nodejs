@@ -9,9 +9,51 @@ $(function () {
         }
     });
 
+    socket.on('connect', function () {
+        $.notify({
+            message: 'Connected websocket'
+        }, {
+                type: 'success',
+                delay: 3000
+            });
+    });
+
+    socket.on('connect_timeout', function (res) {
+        console.log('connect_timeout');
+    });
+
+    socket.on('connect_error', function (res) {
+        console.log('connect_error');
+        $.notify({
+            message: 'Disconnected websocket'
+        }, {
+                type: 'danger',
+                delay: 3000
+            });
+    });
+
+    socket.on('reconnect', function (res) {
+        console.log('reconnect');
+        $.notify({
+            message: 'Connected websocket'
+        }, {
+                type: 'success',
+                delay: 3000
+            });
+    });
+
+
+
+    let timer = null;
     $('#startTimerBtn').on('click', function (evt) {
         socket.emit('getDatas', { msg: 'send' });
-        setInterval(function () {
+
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        timer = setInterval(function () {
             socket.emit('getDatas', { msg: 'send' });
         }, 5000);
     });
@@ -55,11 +97,7 @@ $(function () {
                 }
             }
         });
-
         return chart;
     }
-
-
-
 
 });

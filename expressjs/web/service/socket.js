@@ -6,7 +6,7 @@ module.exports = function (server) {
   io.on('connection', (socket) => {
     console.log('connection');
 
-    socket.on('getDatas', (data) => {
+    socket.on('getDatas', () => {
       sample.getData().then((res) => {
         socket.emit('fromServer', { type: 'chart', data: res });
       }).catch((err) => {
