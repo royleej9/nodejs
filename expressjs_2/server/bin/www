@@ -1,31 +1,29 @@
 #!/usr/bin/env node
-const logger = require("../logger")("app");
-
-
 // global setting - env, alias 등록
-const globalConfig = require('../global.config');
+const globalConfig = require("../global.config");
 globalConfig.setup();
 
+const logger = require("@/logger")("app");
+
 // Module dependencies.
-const {createApp} = require("@webapp/app");
+const { createApp } = require("@app");
 const debug = require("debug")("test-express:server");
 const http = require("http");
 
 // Get port from environment and store in Express.
 let server = null;
-createApp().then(app => {
+createApp().then((app) => {
   const port = normalizePort(process.env.APP_SERVER_PORT || "3000");
   app.set("port", port);
-  
+
   // Create HTTP server.
   server = http.createServer(app);
-  
+
   // Listen on provided port, on all network interfaces.
   server.listen(port);
   server.on("error", onError);
   server.on("listening", onListening);
 });
-
 
 /**
  * Normalize a port into a number, string, or false.

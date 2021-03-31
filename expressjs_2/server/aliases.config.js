@@ -2,13 +2,13 @@ const path = require("path");
 
 const aliases = {
   "@": ".",
-  "@webapp": "webapp",
-  "@api": "webapp/api",
-  "@config": "webapp/config",
-  "@views": "webapp/views",
-  "@web": "webapp/web",
-  "@routes": "webapp/routes",
-  "@utils": "webapp/utils"
+  "@app": "./app",
+  "@api": "./app/api",
+  "@config": "./app/config",
+  "@views": "./app/views",
+  "@web": "./app/web",
+  "@routes": "./app/routes",
+  "@utils": "./app/utils"
 };
 
 const aliasJest = {};
