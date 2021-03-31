@@ -4,7 +4,7 @@ module.exports = {
   setupFiles: ['<rootDir>/test/setup'],
   testMatch: ["**/test/**/(*.)test.js"], // test 케이스
   moduleFileExtensions: ["js"], // 테스트 대상
-  moduleNameMapper: require("./aliases.config").aliasJest,
+  moduleNameMapper: require("./server/aliases.config").aliasJest,
   collectCoverageFrom: [
     // code coverage 대상
     "**/webapp/*.{js,jsx}",

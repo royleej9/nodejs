@@ -13,6 +13,7 @@ function setupAlias() {
   const moduleAlias = require("module-alias");
   const aliases = require("./aliases.config");
   moduleAlias.addAliases(aliases.aliasFullPath);
+  // console.log(aliases.aliasFullPath);
 }
 
 module.exports.setup = function () {

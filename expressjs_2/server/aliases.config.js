@@ -16,17 +16,18 @@ const aliasFullPath = {};
 const jsconfig = {};
 
 for (const alias in aliases) {
-  const aliasTo = aliases[alias];
+  // const aliasTo = aliases[alias];
+  const aliasTo = path.join(__dirname, aliases[alias]);
   const aliasHasExtension = /\.\w+$/.test(aliasTo);
 
   // jest
   aliasJest[`^${alias}$`] = aliasHasExtension
-    ? `<rootDir>/${aliasTo}`
-    : `<rootDir>/${aliasTo}/index.js`;
-  aliasJest[`^${alias}/(.*)$`] = `<rootDir>/${aliasTo}/$1`;
+    ? aliasTo
+    : `${aliasTo}/index.js`;
+  aliasJest[`^${alias}/(.*)$`] = `${aliasTo}/$1`;
 
   // moduleAlias
-  aliasFullPath[alias] = path.join(__dirname, aliasTo);
+  aliasFullPath[alias] = aliasTo;
 }
 
 module.exports.aliasJest = aliasJest;
