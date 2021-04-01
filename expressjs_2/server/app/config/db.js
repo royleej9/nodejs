@@ -9,7 +9,7 @@ const logger = require("@/logger")("app");
 let pool = null;
 
 function createPool() {
-  console.log(">>> creating pool....");
+  logger.info(">>> creating pool....");
   pool = mariadb.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -19,7 +19,7 @@ function createPool() {
     connectTimeout: process.env.DB_CONNECT_TIMEOUT,
     connectionLimit: process.env.DB_CONNECTION_LIMIT
   });
-  console.log(">>> createed pool....");
+  logger.info(">>> createed pool....");
 }
 
 async function testConnectDB() {
