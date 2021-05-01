@@ -3,19 +3,25 @@ const rootPath = path.resolve(process.cwd());
 
 const aliases = {
   '@': '.',
-  '@app': './app',
-  '@api': './app/api',
-  '@config': './app/config',
-  '@views': './app/_views',
-  '@web': './app/web',
-  '@routes': './app/routes',
-  '@utils': './app/utils'
+  '@app': 'server/app',
+  '@api': 'server/api',
+  '@config': 'server/app/config',
+  '@views': 'server/app/_views',
+  '@web': 'server/app/web',
+  '@routes': 'server/app/routes',
+  '@utils': 'server/app/utils'
 };
 
 const aliasesFullPath = {};
 for (const alias in aliases) {
   const aliasTo = aliases[alias];
-  aliasesFullPath[alias] = path.join(rootPath, 'server', aliasTo);
+  aliasesFullPath[alias] = path.join(rootPath, aliasTo);
 }
 
+module.exports.aliases = aliases;
 module.exports.aliasesFullPath = aliasesFullPath;
+module.exports.setupModuleAlias = function () {
+  // module alias 설정 - 제일 먼저 실행되어야함
+  const moduleAlias = require('module-alias');
+  moduleAlias.addAliases(aliasesFullPath);
+};

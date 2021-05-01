@@ -29,4 +29,8 @@ const aliases = {
   '@utils': './app/utils',
   ...
 };
+
+// 프로그램 시작시 제일 먼저 실행되어야 함
+const moduleAlias = require('module-alias');
+moduleAlias.addAliases(aliases);
 ```

@@ -1,7 +1,5 @@
 // module alias 설정 - 제일 먼저 실행되어야함
-const moduleAlias = require('module-alias');
-const { aliasesFullPath } = require('../aliases');
-moduleAlias.addAliases(aliasesFullPath);
+require('../aliases').setupModuleAlias();
 //--------------------------------------------------------------------------------
 
 var createError = require('http-errors');
