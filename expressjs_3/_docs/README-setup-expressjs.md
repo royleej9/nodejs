@@ -78,6 +78,6 @@ module.exports = {
 
 - .prettierignore
 
-```
+``` bash
 /node_modules/**
 ```
