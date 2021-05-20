@@ -25,6 +25,15 @@ $ npm run jsconfig
 
 3. workspace recommendations 항목에 나오는 Extension 설치
 
+## cslf -> lf로 변경
+
+Git에서 windows/linux의 기본 라인 변경 값은 lf로 지정
+
+``` bash
+git config --global core.autocrlf input
+git config --global core.eol lf
+```
+
 ## alias 설정
 
 - 모듈 경로에 대한 축약어 설정
