@@ -14,11 +14,11 @@ const request = require('supertest');
 // });
 
 const users = require('@routes/users');
-const testRouterApp = require('../testRouterApp');
-testRouterApp.use('/users', users);
+const defaultTestRouter = require('../defaultTestRouter');
+defaultTestRouter.use('/users', users);
 
 describe('Test users router', () => {
   test('It should response the GET method', () => {
-    return request(testRouterApp).get('/users').expect(200);
+    return request(defaultTestRouter).get('/users').expect(200);
   });
 });

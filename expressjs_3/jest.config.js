@@ -22,5 +22,6 @@ module.exports = {
     '**/server/**/*.{js,jsx}', // code coverage 대상
     '!**/node_modules/**' // 제외
   ],
-  coverageDirectory: '<rootDir>/test/coverage' // code coverage 결과 파일 생성 폴더
+  coverageDirectory: '<rootDir>/test/coverage', // code coverage 결과 파일 생성 폴더
+  setupFilesAfterEnv: ['jest-extended']
 };

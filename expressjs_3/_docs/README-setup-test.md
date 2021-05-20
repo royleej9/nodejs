@@ -7,6 +7,20 @@
 - <https://jestjs.io/>
 - 테스트 프레임워크
 
+### jest-extended
+
+- <https://github.com/jest-community/jest-extended>
+- 별도 설정 필요 API 설정 부분 참고
+
+``` js
+// jest.config.js
+module.exports = {
+  ...
+  setupFilesAfterEnv: ['jest-extended']
+  ...
+}
+```
+
 ### SuperTest
 
 - <https://www.npmjs.com/package/supertest>
@@ -15,7 +29,7 @@
 ## 설치
 
 ``` bash
-npm install --save-dev jest supertest
+npm install --save-dev jest jest-extended supertest
 ```
 
 ## 환경 설정

@@ -12,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var indexRouter = require('@routes/index');
 var usersRouter = require('@routes/users');
+var authRouter = require('@routes/auth');
 var app = express();
 
 // view engine setup
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, '_public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -45,14 +47,3 @@ app.use(function (err, req, res) {
 });
 
 module.exports = app;
-
-// const winston = require('winston');
-// console.log(winston.config.syslog.levels);
-
-const logger = require('@utils/logger');
-logger.error('error!!!');
-logger.warn('warn!!!');
-logger.info('info!!!');
-logger.http('http!!');
-logger.debug('debug!!');
-// console.log(logger);
