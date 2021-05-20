@@ -33,7 +33,7 @@ const levels = {
   debug: 4
 };
 
-const logger = winston.createLogger({
+const winstonLogger = winston.createLogger({
   level:
     levels[process.env.LOG_LEVEL] !== undefined
       ? process.env.LOG_LEVEL
@@ -42,5 +42,23 @@ const logger = winston.createLogger({
   format: printFormat.json,
   transports: [new winston.transports.Console(), dailyRotateFileTransport]
 });
+
+const logger = {
+  error(msg) {
+    winstonLogger.error(msg);
+  },
+  warn(msg) {
+    winstonLogger.warn(msg);
+  },
+  info(msg) {
+    winstonLogger.info(msg);
+  },
+  http(msg) {
+    winstonLogger.http(msg);
+  },
+  debug(msg) {
+    winstonLogger.debug(msg);
+  }
+};
 
 module.exports = logger;
